@@ -1,0 +1,872 @@
+[
+    {
+        "id": "5b01dbc9d210260e",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "879e82d59b8b5c7c",
+        "type": "debug",
+        "z": "5b01dbc9d210260e",
+        "name": "sv",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5f33d14ca34796a3",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "0",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "2847e49758f1f539",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "ac6c2517141b09f2",
+        "type": "debug",
+        "z": "5b01dbc9d210260e",
+        "name": "pv",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1390,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8dc2a00758130698",
+        "type": "trigger",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-99",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1110,
+        "y": 520,
+        "wires": [
+            [
+                "5655fa28922d405d",
+                "2e269c145485822b"
+            ]
+        ]
+    },
+    {
+        "id": "0217a70640d4db4b",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "11",
+        "payloadType": "num",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "0beb68d619762af6",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "99",
+        "payloadType": "num",
+        "x": 90,
+        "y": 580,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "2a80842005440d51",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "111",
+        "payloadType": "num",
+        "x": 90,
+        "y": 640,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "2e269c145485822b",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "move",
+        "func": "var count = context.get(\"count2\") || 0;\nmsg.position = msg.position + msg.pid;\n\nif(msg.position>count && count<100){\n    count+=1;\n    //count = count + msg.error;\n}\nif(msg.position<count && count>0){\n    count-=1;\n    //count = count - msg.error;\n}\n//if(count>0 && count < 100)\n//    count = Math.round(count + msg.pid/9);\n\nmsg.position=count;\nmsg.payload=count;\ncontext.set(\"count2\", count);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "879e82d59b8b5c7c",
+                "a0e6fcbaebaf149c",
+                "a0de360b5b66f2f4"
+            ]
+        ]
+    },
+    {
+        "id": "a0e6fcbaebaf149c",
+        "type": "ui_gauge",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "group": "febb3407a8971229",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "sv",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "05f87b66fb0fb52a",
+        "type": "ui_slider",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "label": "set",
+        "tooltip": "",
+        "group": "febb3407a8971229",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "200",
+        "step": 1,
+        "className": "",
+        "x": 250,
+        "y": 520,
+        "wires": [
+            [
+                "2de58fc4b454a5e9",
+                "5a3f402ddb9cade8"
+            ]
+        ]
+    },
+    {
+        "id": "c7c9403fee0f2cce",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "77",
+        "payloadType": "num",
+        "x": 90,
+        "y": 520,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "5655fa28922d405d",
+        "type": "debug",
+        "z": "5b01dbc9d210260e",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "pid",
+        "statusType": "msg",
+        "x": 1420,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0af3709f597518e9",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "my_pid",
+        "func": "// PID parameters\nvar Kp = msg.nKp || context.get('Kp') || 1.0;  // Proportional gain\nvar Ki = msg.nKi || context.get('Ki') || 0;  // Integral gain\nvar Kd = msg.nKd || context.get('Kd') || 0; // Derivative gain\n\ncontext.set('Kp', Kp);\ncontext.set('Ki', Ki);\ncontext.set('Kd', Kd);\n\nmsg.Kp = Kp;\nmsg.Ki = Ki;\nmsg.Kd = Kd;\n\ndelete msg.nKp;\ndelete msg.nKi;\ndelete msg.nKd;\n\n// Setpoint and process variable (should be input to the function)\nvar setpoint = msg.setpoint || context.get('setpoint') || 0;   // Desired value\ncontext.set('setpoint', setpoint);\nmsg.setpoint = setpoint;\ndelete msg.new_setpoint;\n\n// Calculate error\nvar pv = msg.temp || 0;   // Current value\nvar olderr = context.get('olderr') || 0;\nvar integral = context.get('integral') || 0;\nvar error = setpoint - pv;\n\nvar prop = 0;\nif (setpoint > pv*1.4 || setpoint < pv*0.6)\n    prop = error;\nif (Math.abs(integral) < 9)\n    integral += error;\nelse\n    integral = 0;\n\nvar div = error - olderr;\n\ncontext.set('olderr', error);\ncontext.set('integral', integral);\n// Calculate PID output\n//var output = (Kp * error) + (Ki * integral) + (Kd * derivative);\nvar output = (Kp * prop) + (Ki * integral) + (Kd * div);\n\n// Update previous error and integral for the next calculation\n\n// Set PID output as payload\nmsg.pid = Math.round(output) || 0;\nmsg.error = Math.round(error);\nmsg.prop = Math.round(prop);\nmsg.integral = Math.round(integral);\nmsg.div = Math.round(div);\n\n// Return the modified msg object\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 640,
+        "wires": [
+            [
+                "8dc2a00758130698"
+            ]
+        ]
+    },
+    {
+        "id": "bb60da4f7827fb21",
+        "type": "delay",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "99",
+        "timeoutUnits": "milliseconds",
+        "rate": "9",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 440,
+        "wires": [
+            [
+                "e56cbbd60e53c69b",
+                "0af3709f597518e9"
+            ]
+        ]
+    },
+    {
+        "id": "2de58fc4b454a5e9",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "set",
+        "func": "msg.setpoint = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 520,
+        "wires": [
+            [
+                "9028a8c82aa917dd",
+                "e56cbbd60e53c69b",
+                "0af3709f597518e9"
+            ]
+        ]
+    },
+    {
+        "id": "a0de360b5b66f2f4",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "temp",
+        "func": "function getRandomInt(min, max) {\n    return Math.floor(Math.random() * (max - min + 1)) + min;\n}\n\nlet count = context.get(\"count1\") || 0;\nlet time = msg.time || context.get('tm') || 66;\n\nif(msg.payload>count && count < 100)\n    count = count + msg.position/time;\n\nif(msg.payload < count && count> 0)\n    count = count - (100-msg.position)/time;\n\ncontext.set(\"count1\", count);\ncontext.set(\"tm\", time);\nlet temp = getRandomInt(count-1, count+1);\nmsg.temp = Math.round(temp*2);\nmsg.payload = msg.temp;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            [
+                "ac6c2517141b09f2",
+                "d367011e1bff2991",
+                "bb60da4f7827fb21"
+            ]
+        ]
+    },
+    {
+        "id": "8230b3a013be304c",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "130",
+        "payloadType": "num",
+        "x": 90,
+        "y": 700,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "80417bc2f1d511a7",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "33",
+        "payloadType": "num",
+        "x": 90,
+        "y": 460,
+        "wires": [
+            [
+                "05f87b66fb0fb52a"
+            ]
+        ]
+    },
+    {
+        "id": "b6f9fa311782a84e",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "Kp",
+        "func": "msg.nKp = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 640,
+        "wires": [
+            [
+                "0af3709f597518e9",
+                "9028a8c82aa917dd"
+            ]
+        ]
+    },
+    {
+        "id": "8bcba8830a7c0b56",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "ceeaf328adf7ae42"
+            ]
+        ]
+    },
+    {
+        "id": "d367011e1bff2991",
+        "type": "ui_gauge",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "group": "febb3407a8971229",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "pv",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1390,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3685e9f58f3bb9b0",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "Ki",
+        "func": "msg.nKi = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 720,
+        "wires": [
+            [
+                "0af3709f597518e9",
+                "9028a8c82aa917dd"
+            ]
+        ]
+    },
+    {
+        "id": "15c65dedacab936a",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "Kd",
+        "func": "msg.nKd = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 800,
+        "wires": [
+            [
+                "0af3709f597518e9",
+                "9028a8c82aa917dd"
+            ]
+        ]
+    },
+    {
+        "id": "3daccde46511b633",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.2",
+        "payloadType": "num",
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "8584d6590e3ac31c"
+            ]
+        ]
+    },
+    {
+        "id": "36455a23ded04322",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.05",
+        "payloadType": "num",
+        "x": 110,
+        "y": 860,
+        "wires": [
+            [
+                "7bbc74d07736a5a8"
+            ]
+        ]
+    },
+    {
+        "id": "9028a8c82aa917dd",
+        "type": "debug",
+        "z": "5b01dbc9d210260e",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "5a3f402ddb9cade8",
+        "type": "debug",
+        "z": "5b01dbc9d210260e",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e30cc5b1be30e0f0",
+        "type": "inject",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 110,
+        "y": 900,
+        "wires": [
+            [
+                "8584d6590e3ac31c",
+                "7bbc74d07736a5a8",
+                "ceeaf328adf7ae42"
+            ]
+        ]
+    },
+    {
+        "id": "ceeaf328adf7ae42",
+        "type": "ui_slider",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "label": "Kp",
+        "tooltip": "",
+        "group": "febb3407a8971229",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "3",
+        "step": "0.01",
+        "className": "",
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "b6f9fa311782a84e"
+            ]
+        ]
+    },
+    {
+        "id": "8584d6590e3ac31c",
+        "type": "ui_slider",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "label": "Ki",
+        "tooltip": "",
+        "group": "febb3407a8971229",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 490,
+        "y": 720,
+        "wires": [
+            [
+                "3685e9f58f3bb9b0"
+            ]
+        ]
+    },
+    {
+        "id": "7bbc74d07736a5a8",
+        "type": "ui_slider",
+        "z": "5b01dbc9d210260e",
+        "name": "",
+        "label": "Kd",
+        "tooltip": "",
+        "group": "febb3407a8971229",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 490,
+        "y": 800,
+        "wires": [
+            [
+                "15c65dedacab936a"
+            ]
+        ]
+    },
+    {
+        "id": "e56cbbd60e53c69b",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "my_auto",
+        "func": "function round(value) {\n    // Ensure the decimalPlaces is an integer\n    let decimalPlaces = Math.max(0, Math.floor(2));\n\n    // Rounding calculation\n    let factor = Math.pow(10, decimalPlaces);\n    return Math.round(value * factor) / factor;\n}\n\n// Auto-Tuning PID Controller Function\n\n// Settings\nconst Kp_base = 1.0; // Base proportional gain\nconst time_constant = 5.0; // Time constant for tuning response\n\n// State variables\nlet setpoint = msg.setpoint || context.get('setp'); // Desired value\nlet pv = msg.temp; // Current value\nlet error = setpoint - pv; // Calculate error\nlet Kp, Ki, Kd;\n\n// Initialize parameters if not yet set\nif (!context.get('tuning')) {\n    context.set('tuning', true);\n    Kp = Kp_base; // Initial Proportional gain\n    Ki = Kp / (2 * time_constant); // Estimate Integral gain\n    Kd = Kp * time_constant / 7; // Estimate Derivative gain\n    context.set('previous_error', error);\n} else {\n    // Retrieve previous state\n    Kp = context.get('Kp');\n    Ki = context.get('Ki');\n    Kd = context.get('Kd');\n    Ki = Kp / (2 * time_constant); // Estimate Integral gain\n    Kd = Kp * time_constant / 7; // Estimate Derivative gain\n}\n\nlet prop = 0;\nif (setpoint > pv*1.3 || setpoint < pv*0.7)\n    prop = error;\nelse\n    prop = error/9;\n\n// Update the integral term based on error\nlet previous_error = context.get('previous_error');\nlet integral = context.get('integral') || 0;\n\n// Anti-reset windup condition\nif (Math.abs(integral) < 9) { // Adjust threshold as needed\n    integral += error; // Accumulate error\n} else {\n    integral = 0; // Reset integral term if outside threshold\n}\n\n// Calculate derivative term\nlet derivative = error - previous_error;\n\n// PID output\nlet output = (Kp * prop) + (Ki * integral) + (Kd * derivative);\n\n// Prepare PID output for actuator\nmsg.pid = Math.round(output);\n\n// Update previous error for the next iteration\ncontext.set('previous_error', error);\n    \n// Optionally adjust Kp, Ki, Kd based on performance metrics.\n// Here, dynamically adjusting Kp as a simplistic example\nif (Math.abs(error) < 2 && Kp < 2.9)\n    Kp += 0.01;\n\nif (Math.abs(error) > 2 && Kp>0.6) \n    Kp -= 0.01;\n\n\n// Save current PID parameters for next iteration\ncontext.set('Kp', Kp);\ncontext.set('Ki', Ki);\ncontext.set('Kd', Kd);\ncontext.set('setp');\ncontext.set('integral', context.get('integral') || 0);\nmsg.kp = round(Kp); msg.ki = round(Ki); msg.kd = round(Kd);\n\n// Final output\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 520,
+        "wires": [
+            [
+                "e9a3e7f3a4046b10",
+                "09971e179759da3e",
+                "fa0a6887f37689c6"
+            ]
+        ]
+    },
+    {
+        "id": "e9a3e7f3a4046b10",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "kp->",
+        "func": "msg.payload = msg.kp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 640,
+        "wires": [
+            [
+                "ceeaf328adf7ae42"
+            ]
+        ]
+    },
+    {
+        "id": "09971e179759da3e",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "ki->",
+        "func": "msg.payload = msg.ki;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 720,
+        "wires": [
+            [
+                "8584d6590e3ac31c"
+            ]
+        ]
+    },
+    {
+        "id": "fa0a6887f37689c6",
+        "type": "function",
+        "z": "5b01dbc9d210260e",
+        "name": "kd->",
+        "func": "msg.payload = msg.kd;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 800,
+        "wires": [
+            [
+                "7bbc74d07736a5a8"
+            ]
+        ]
+    },
+    {
+        "id": "febb3407a8971229",
+        "type": "ui_group",
+        "name": "pid autotune",
+        "tab": "121e06c4cd271891",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "121e06c4cd271891",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a8cf54ef6b4d5101",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
