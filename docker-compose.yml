@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  node-red:
+    image: nodered/node-red:latest-20-minimal
+    container_name: nodered.min
+    network_mode: "host"
+    environment:
+      - TZ=Etc/UTC
+    volumes:
+      - ./min:/data # sudo chown -R 1000:1000 min
+    restart: unless-stopped
