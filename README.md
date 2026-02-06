@@ -38,7 +38,7 @@
 
 ## 4. Run Node-RED in Docker compose
    ``` bash
-   docker-compose -f minimal.yml up -d
+   docker-compose up -d
    ```
 ---
 
