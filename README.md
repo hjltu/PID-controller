@@ -44,6 +44,11 @@
 
 ## 5. Accessing Node-RED
 
+Open a web browser and navigate to http://localhost:1880
+Import flows.json file and Deploy
+
+### 5.1. Accessing Node-RED User Interface
+
 Open a web browser and navigate to http://localhost:1880/ui
 
 ---
